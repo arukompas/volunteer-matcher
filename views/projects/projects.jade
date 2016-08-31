@@ -7,5 +7,5 @@ block content
     br
     ul
       each project in projects
-        li= project.title
+        li= project.title+', '+project.description+', from '+ project.startingDate+' to '+ project.endDate
         
