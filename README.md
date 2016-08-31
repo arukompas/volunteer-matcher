@@ -51,6 +51,34 @@ So I can help towards a project's goals,
 I would like to contribute with resources.
 ```
 
+## Models
+
+* Project
+  * belongs_to user/project manager
+  * has_many Requirements
+  * Title, description, etc.
+
+
+* Requirement
+  * belongs_to Project
+  * has_many Offers
+  * Title, description, quantity, etc...
+
+
+* Offer
+  * belongs_to user
+  * belongs_to Requirement
+  * accepted? true/false
+  * fulfils a single Requirement
+
+
+* User/account
+  * has_many Projects
+  * has_many Offers
+  * user can submit an offer to fulfil a single Requirement
+
+
+
 ## Structure
 
 * A project
