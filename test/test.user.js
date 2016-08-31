@@ -6,13 +6,11 @@ var db;
 describe('Account', function() {
 
     before(function(done) {
-        db = mongoose.connect('mongodb://localhost/test');
-            done();
+      db = mongoose.connect('mongodb://localhost/test', done);
     });
 
     after(function(done) {
-        mongoose.connection.close();
-        done();
+      mongoose.connection.close(done);
     });
 
     beforeEach(function(done) {
