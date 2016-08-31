@@ -11,22 +11,40 @@ var Project = require("../../../models/project.js");
 
 
 describe('Create a project', function() {
-  this.timeout(5000);
+
+  this.timeout(10000);
   var browser = new Browser();
-  before(function(done) {
 
-    browser.visit('/projects/new', done);
 
+  describe('Not signed-in users', function(){
+    before(function(done) {
+      browser.visit('/projects/new', done);
+    });
+    it('should see the project list in the projects page', function(){
+        browser.assert.text('h1', 'Listed Projects');
+    });
   });
 
   describe('Signed-in users', function(){
+
     before(function(done) {
-      browser
-        .fill('title',       'Building a school')
-        .fill('description', 'a new school')
-        .fill('startingDate', '21-10-2016')
-        .fill('endDate',     '21-10-2017')
-        .pressButton('Add Project', done);
+      browser.visit('/register', function(done){
+        browser
+            .fill('username', 'Bob')
+            .fill('password', 'password')
+            .pressButton('Submit', function(done){
+              browser.visit('/projects/new', function(done){
+                browser
+                  .fill('title',       'Building a school')
+                  .fill('description', 'a new school')
+                  .fill('startingDate', '21-10-2016')
+                  .fill('endDate',     '21-10-2017')
+                  .pressButton('Add Project', done);
+              });
+            });
+      });
+
+
     });
 
     it('should be successful', function() {
@@ -38,9 +56,7 @@ describe('Create a project', function() {
     });
   });
 
-  // describe('Not signed-in users', function(){
-  //
-  // });
+
 
   after(function() {
     mongoose.connection.close();

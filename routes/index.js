@@ -50,7 +50,11 @@ router.get('/ping', function(req, res){
 
 
 router.get('/projects/new', function (req, res) {
+  if (!req.user) {
+    res.redirect('/projects');
+  } else {
     res.render('projects/new', {  });
+  }
 });
 
 // router.post('/projects', function(req, res) {
