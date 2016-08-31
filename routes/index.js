@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var Account = require('../models/account');
+var Project = require('../models/project');
 var router = express.Router();
 
 /* GET home page. */
@@ -46,5 +47,40 @@ router.get('/logout', function(req, res) {
 router.get('/ping', function(req, res){
     res.status(200).send("pong!");
 });
+
+
+router.get('/projects/new', function (req, res) {
+  if (!req.user) {
+    res.redirect('/projects');
+  } else {
+    res.render('projects/new', {  });
+  }
+});
+
+// router.post('/projects', function(req, res) {
+//     res.redirect('/projects');
+// });
+
+
+router.post('/projects', function(req, res) {
+    var project = new Project({ title : req.body.title, description: req.body.description, startingDate: req.body.startingDate, endDate: req.body.endDate });
+    project.save(function(err, project) {
+      if(err){
+        res.send('Error saving project')
+      } else {
+        res.redirect('/projects');
+      }
+    });
+
+});
+
+
+
+router.get('/projects', function(req, res) {
+  Project.find({}, function(err, projects) {
+    res.render('projects/projects', {projects: projects});
+  });
+});
+
 
 module.exports = router;
