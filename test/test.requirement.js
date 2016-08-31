@@ -1,13 +1,18 @@
+var chai = require('chai'), assert = chai.assert, expect = chai.expect, should = chai.should();
+var mongoose = require('mongoose');
+var Requirement = require("../models/requirement.js");
+var db;
+
 describe('Requirement', function() {
 
     before(function(done) {
-        db = mongoose.connect('mongodb://localhost/test');
-            done();
+      db = mongoose.connect('mongodb://localhost/test');
+        done();
     });
 
     after(function(done) {
-        mongoose.connection.close();
-        done();
+      mongoose.connection.close();
+      done();
     });
 
     beforeEach(function(done) {
@@ -15,6 +20,7 @@ describe('Requirement', function() {
         _project_id: 1,
         title: 'Some object',
         description: 'Some description',
+        isActive: true,
         capacity: 3,
         duration: {from: Date.now(), to: Date.now()}
       });
