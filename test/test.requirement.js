@@ -5,11 +5,6 @@ var db;
 
 describe('Requirement', function() {
 
-  before(function(done) {
-    db = mongoose.createConnection('mongodb://localhost/test');
-    done();
-  });
-
   beforeEach(function(done) {
     var requirement = new Requirement({
       _project_id: 1,
@@ -39,10 +34,5 @@ describe('Requirement', function() {
         done();
     });
   });
-
-  after(function(done) {
-    mongoose.connection.close(done);
-  });
-
 
 });

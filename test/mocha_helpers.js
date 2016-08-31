@@ -1,11 +1,15 @@
-// before(function() {
-//   chai = require('chai'), assert = chai.assert, expect = chai.expect;
-//   mongoose = require('mongoose');
-//   Requirement = require("../models/requirement.js");
-//   db = null;
-// });
+var http = require('http');
+var app;
+var mongoose = require('mongoose');
+var server;
 
-// var chai = require('chai'), assert = chai.assert, expect = chai.expect, should = chai.should();
-// var mongoose = require('mongoose');
-// var Requirement = require("../models/requirement.js");
-// var db;
+before(function(done){
+  app = require('../app.js');
+  server = http.createServer(app).listen(3000);
+  done();
+});
+
+after(function(done){
+  mongoose.connection.close();
+  server.close(done);
+});
