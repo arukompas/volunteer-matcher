@@ -47,4 +47,19 @@ router.get('/ping', function(req, res){
     res.status(200).send("pong!");
 });
 
+
+router.get('/projects/new', function (req, res) {
+    res.render('projects/new', {  });
+});
+
+router.post('/projects', function(req, res) {
+    console.log("req: ", req);
+    res.redirect('/projects');
+});
+
+router.get('/projects', function(req, res) {
+    res.render('projects/projects', { });
+});
+
+
 module.exports = router;
