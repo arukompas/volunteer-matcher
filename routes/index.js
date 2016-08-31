@@ -53,7 +53,7 @@ router.get('/projects/new', function (req, res) {
 });
 
 router.post('/projects', function(req, res) {
-    console.log("req: ", req);
+
     res.redirect('/projects');
 });
 
