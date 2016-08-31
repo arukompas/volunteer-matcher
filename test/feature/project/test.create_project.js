@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 var server = http.createServer(app).listen(3000);
 
 describe('Create a project', function() {
-  this.timeout(10000);
+  this.timeout(5000);
   var browser = new Browser();
   before(function(done) {
 
@@ -26,12 +26,12 @@ describe('Create a project', function() {
         .pressButton('Add Project', done);
     });
 
-    it('should be successful', function(done) {
-      browser.assert.success(done);
+    it('should be successful', function() {
+      browser.assert.success();
     });
 
-    it('should see the project title', function(done) {
-      browser.assert.text('li', 'Building a school', done);
+    it('should see the project title', function() {
+      browser.assert.text('li', 'Building a school');
     });
   });
 
@@ -39,9 +39,9 @@ describe('Create a project', function() {
   //
   // });
 
-  after(function(done) {
+  after(function() {
     mongoose.connection.close();
-    server.close(done);
+    server.close();
 
   });
 });
