@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var Account = require('../models/account');
+var Project = require('../models/project');
 var router = express.Router();
 
 /* GET home page. */
@@ -52,13 +53,32 @@ router.get('/projects/new', function (req, res) {
     res.render('projects/new', {  });
 });
 
-router.post('/projects', function(req, res) {
+// router.post('/projects', function(req, res) {
+//     res.redirect('/projects');
+// });
 
-    res.redirect('/projects');
+
+router.post('/projects', function(req, res) {
+    var project = new Project({ title : req.body.title });
+    project.save(function(err, project) {
+      if(err){
+        res.send('Error saving project')
+      } else {
+        console.log(project);
+        // res.send(project);
+        res.redirect('/projects');
+      }
+    });
+
 });
 
+
+
 router.get('/projects', function(req, res) {
-    res.render('projects/projects', { });
+  Project.find({}, function(err, projects) {
+    console.log("projects: ",projects);
+    res.render('projects/projects', {projects: projects});
+  });
 });
 
 
