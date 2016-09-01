@@ -2,6 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var Account = require('../models/account');
 var Project = require('../models/project');
+var Requirement = require('../models/requirement');
 var router = express.Router();
 
 /* GET home page. */
@@ -58,7 +59,12 @@ router.get('/projects/new', function (req, res) {
 });
 
 router.post('/projects', function(req, res) {
-  var project = new Project({ title : req.body.title, description: req.body.description, startingDate: req.body.startingDate, endDate: req.body.endDate });
+  var project = new Project({
+    title : req.body.title,
+    description: req.body.description,
+    startingDate: req.body.startingDate,
+    endDate: req.body.endDate
+  });
   project.save(function(err, project) {
     if(err){
       res.send('Error saving project')
@@ -74,6 +80,16 @@ router.get('/projects', function(req, res) {
   });
 });
 
+router.get('/projects/:projectId/requirements', function(req, res){
+  Requirement.find({projectId: req.params.projectId}, function(err, requirements) {
+    if (err) {
+      res.send('Error getting requirements from the database');
+    } else {
+      res.render('requirements/index', { requirements: requirements });
+    }
+  });
+});
+
 router.get('/projects/:projectId/requirements/new', function(req, res) {
   console.log(req.params);
   if (!req.user) {
@@ -85,7 +101,23 @@ router.get('/projects/:projectId/requirements/new', function(req, res) {
 
 router.post('/projects/:projectId/requirements', function(req, res) {
   console.log(req.params);
-  res.send();
+  var requirement = new Requirement({
+    projectId: req.params.projectId,
+    title: req.body.title,
+    description: req.body.description,
+    capacity: req.body.capacity,
+    startingDate: req.body.startingDate,
+    endDate: req.body.endDate
+  });
+  requirement.save(function(err, requirement){
+    if (err) {
+      res.send('Error creating a requirement');
+    } else {
+      res.redirect('/projects/' + req.params.projectId + '/requirements')
+    }
+  });
+
+  // res.render('requirements/requirement', { requirement: requirement });
   // var requirement = new Requirement({projectId}
 })
 

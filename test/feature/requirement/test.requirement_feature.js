@@ -1,6 +1,7 @@
 var chai = require('chai'), assert = chai.assert, expect = chai.expect, should = chai.should();
 var Browser = require('zombie');
 var browser = new Browser({ site: 'http://localhost:3000' });
+var Requirement = require('../../../models/requirement');
 
 describe('Create a requirement', function(){
 
@@ -40,6 +41,20 @@ describe('Create a requirement', function(){
       browser.assert.success();
     });
 
+    it('displays the requirement on the page', function() {
+      browser.assert.text('#title', 'Teachers Needed');
+      browser.assert.text('#description', 'Teachers are needed');
+      browser.assert.text('#capacity', 'Quantity needed: 5');
+      browser.assert.text('#startingDate', 'Starting on 21-10-2016');
+      browser.assert.text('#endDate', 'Ending on 21-10-2017');
+    });
+
+  });
+
+  afterEach(function(done){
+    Requirement.remove({}, function(){
+      done();
+    });
   });
 
 });
