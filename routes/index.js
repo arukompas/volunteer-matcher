@@ -53,7 +53,7 @@ router.get('/projects/new', function (req, res) {
   if (!req.user) {
     res.redirect('/projects');
   } else {
-    res.render('projects/new', {  });
+    res.render('projects/new');
   }
 });
 
@@ -74,14 +74,20 @@ router.get('/projects', function(req, res) {
   });
 });
 
-router.get('/requirements/new', function(req, res) {
+router.get('/projects/:projectId/requirements/new', function(req, res) {
+  console.log(req.params);
   if (!req.user) {
     res.redirect('/projects');
   } else {
-
+    res.render('requirements/new', {projectId: req.params.projectId});
   }
 })
 
+router.post('/projects/:projectId/requirements', function(req, res) {
+  console.log(req.params);
+  res.send();
+  // var requirement = new Requirement({projectId}
+})
 
 
 module.exports = router;

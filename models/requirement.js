@@ -2,15 +2,17 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var RequirementSchema = new Schema({
-  _project_id: Number,
+  projectId: Number,
   title: String,
   description: String,
   isActive: Boolean,
   capacity: Number,
-  duration: {
-    from: Date,
-    to: Date
-  }
+  // duration: {
+  //   from: Date,
+  //   to: Date
+  // }
+  startingDate: String,
+  endDate:      String
 });
 
 module.exports = mongoose.model('Requirement', RequirementSchema);

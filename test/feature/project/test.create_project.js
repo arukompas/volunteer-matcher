@@ -27,7 +27,6 @@ describe('Create a project', function() {
             .fill('password', 'password')
             .pressButton('Submit', function(){
               browser.visit('/projects/new', function(){
-                console.log('in the last block --');
                 browser
                   .fill('title',       'Building a school')
                   .fill('description', 'a new school')
