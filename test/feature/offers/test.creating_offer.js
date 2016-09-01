@@ -13,7 +13,7 @@ describe('Creating an offer', function() {
     });
 
     it('should not allow to make an offer when not logged in', function(){
-      browser.assert.text('h1', 'Listed Projects');
+      browser.assert.text('h1.projects', 'Listed Projects');
     });
   });
 
@@ -26,6 +26,15 @@ describe('Creating an offer', function() {
 
     it('should display the page', function() {
       browser.assert.success();
+    });
+
+    it('should save the offer and display it', function(done){
+      browser
+        .fill('message', 'I\'m the man for the job!')
+        .pressButton('Send the offer').then(function(){
+          browser.assert.text('.message', 'I\'m the man for the job!');
+          done();
+        });
     });
   });
 
