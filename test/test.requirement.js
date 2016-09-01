@@ -1,5 +1,4 @@
 var chai = require('chai'), assert = chai.assert, expect = chai.expect, should = chai.should();
-var mongoose = require('mongoose');
 var Requirement = require("../models/requirement.js");
 var db;
 

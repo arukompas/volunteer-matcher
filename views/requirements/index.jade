@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+  each requirement in requirements
+    h2#title= requirement.title
+    p#description= requirement.description
+    p#capacity= 'Quantity needed: ' + requirement.capacity
+    p#startingDate= 'Starting on ' + requirement.startingDate
+    p#endDate= 'Ending on ' + requirement.endDate

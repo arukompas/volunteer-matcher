@@ -1,3 +1,5 @@
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -45,7 +47,7 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 // mongoose
-mongoose.connect('mongodb://localhost/volunteer_matcher');
+mongoose.connect('mongodb://localhost/volunteer_matcher_' + process.env.NODE_ENV);
 
 
 // catch 404 and forward to error handler

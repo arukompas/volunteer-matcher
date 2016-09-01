@@ -1,16 +1,18 @@
 var mongoose = require('mongoose');
+var autoIncrement = require('mongoose-auto-increment');
 var Schema = mongoose.Schema;
 
 var RequirementSchema = new Schema({
-  _project_id: Number,
+  _id: Number,
+  _projectId: Number,
   title: String,
   description: String,
-  isActive: Boolean,
+  isActive: { type: Boolean, default: true },
   capacity: Number,
-  duration: {
-    from: Date,
-    to: Date
-  }
+  startingDate: String,
+  endDate:      String
 });
 
+autoIncrement.initialize(mongoose.connection);
+RequirementSchema.plugin(autoIncrement.plugin, 'Requirement');
 module.exports = mongoose.model('Requirement', RequirementSchema);

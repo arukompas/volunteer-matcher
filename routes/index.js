@@ -2,6 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var Account = require('../models/account');
 var Project = require('../models/project');
+var Requirement = require('../models/requirement');
 var router = express.Router();
 
 /* GET home page. */
@@ -53,32 +54,66 @@ router.get('/projects/new', function (req, res) {
   if (!req.user) {
     res.redirect('/projects');
   } else {
-    res.render('projects/new', {  });
+    res.render('projects/new');
   }
 });
 
-// router.post('/projects', function(req, res) {
-//     res.redirect('/projects');
-// });
-
-
 router.post('/projects', function(req, res) {
-    var project = new Project({ title : req.body.title, description: req.body.description, startingDate: req.body.startingDate, endDate: req.body.endDate });
-    project.save(function(err, project) {
-      if(err){
-        res.send('Error saving project')
-      } else {
-        res.redirect('/projects');
-      }
-    });
-
+  var project = new Project({
+    title : req.body.title,
+    description: req.body.description,
+    startingDate: req.body.startingDate,
+    endDate: req.body.endDate,
+    owner_id: req.user._id
+  });
+  project.save(function(err, project) {
+    if(err){
+      res.send('Error saving project')
+    } else {
+      res.redirect('/projects');
+    }
+  });
 });
-
-
 
 router.get('/projects', function(req, res) {
   Project.find({}, function(err, projects) {
     res.render('projects/projects', {projects: projects});
+  });
+});
+
+router.get('/projects/:projectId/requirements', function(req, res){
+  Requirement.find({_projectId: req.params.projectId}, function(err, requirements) {
+    if (err) {
+      res.send('Error getting requirements from the database');
+    } else {
+      res.render('requirements/index', { requirements: requirements });
+    }
+  });
+});
+
+router.get('/projects/:projectId/requirements/new', function(req, res) {
+  if (!req.user) {
+    res.redirect('/projects');
+  } else {
+    res.render('requirements/new', { projectId: req.params.projectId });
+  }
+});
+
+router.post('/projects/:projectId/requirements', function(req, res) {
+  var requirement = new Requirement({
+    _projectId: req.params.projectId,
+    title: req.body.title,
+    description: req.body.description,
+    capacity: req.body.capacity,
+    startingDate: req.body.startingDate,
+    endDate: req.body.endDate
+  });
+  requirement.save(function(err, requirement){
+    if (err) {
+      res.send('Error creating a requirement');
+    } else {
+      res.redirect('/projects/' + req.params.projectId + '/requirements')
+    }
   });
 });
 
