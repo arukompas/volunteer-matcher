@@ -1,10 +1,6 @@
 var chai = require('chai'), assert = chai.assert, expect = chai.expect, should = chai.should();
 var Browser = require('zombie');
-Browser.localhost('example.com', 3000);
-// var app = require('../../../app.js');
-// var mongoose = require('mongoose');
-// var browser = new Browser({ site: 'http://localhost:3000' });
-// var server = http.createServer(app).listen(3000);
+var browser = new Browser({ site: 'http://localhost:3000' });
 var should = require("should");
 var Project = require("../../../models/project.js");
 
@@ -12,8 +8,6 @@ var Project = require("../../../models/project.js");
 describe('Create a project', function() {
 
   this.timeout(10000);
-  var browser = new Browser();
-
 
   describe('Not signed-in users', function(){
     before(function(done) {

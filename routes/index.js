@@ -57,30 +57,31 @@ router.get('/projects/new', function (req, res) {
   }
 });
 
-// router.post('/projects', function(req, res) {
-//     res.redirect('/projects');
-// });
-
-
 router.post('/projects', function(req, res) {
-    var project = new Project({ title : req.body.title, description: req.body.description, startingDate: req.body.startingDate, endDate: req.body.endDate });
-    project.save(function(err, project) {
-      if(err){
-        res.send('Error saving project')
-      } else {
-        res.redirect('/projects');
-      }
-    });
-
+  var project = new Project({ title : req.body.title, description: req.body.description, startingDate: req.body.startingDate, endDate: req.body.endDate });
+  project.save(function(err, project) {
+    if(err){
+      res.send('Error saving project')
+    } else {
+      res.redirect('/projects');
+    }
+  });
 });
-
-
 
 router.get('/projects', function(req, res) {
   Project.find({}, function(err, projects) {
     res.render('projects/projects', {projects: projects});
   });
 });
+
+router.get('/requirements/new', function(req, res) {
+  if (!req.user) {
+    res.redirect('/projects');
+  } else {
+
+  }
+})
+
 
 
 module.exports = router;
