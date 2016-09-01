@@ -63,7 +63,7 @@ router.get('/projects/new', function (req, res) {
 
 
 router.post('/projects', function(req, res) {
-    var project = new Project({ title : req.body.title, description: req.body.description, startingDate: req.body.startingDate, endDate: req.body.endDate });
+    var project = new Project({ title : req.body.title, description: req.body.description, startingDate: req.body.startingDate, endDate: req.body.endDate, owner_id: req.user._id });
     project.save(function(err, project) {
       if(err){
         res.send('Error saving project')

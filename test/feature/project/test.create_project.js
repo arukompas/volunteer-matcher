@@ -11,7 +11,7 @@ var Project = require("../../../models/project.js");
 
 describe('Create a project', function() {
 
-  this.timeout(10000);
+  this.timeout(30000);
   var browser = new Browser();
 
 
@@ -37,8 +37,8 @@ describe('Create a project', function() {
                 browser
                   .fill('title',       'Building a school')
                   .fill('description', 'a new school')
-                  .fill('startingDate', '21-10-2016')
-                  .fill('endDate',     '21-10-2017')
+                  .fill('startingDate', new Date("October 13, 2014 11:13:00"))
+                  .fill('endDate',     new Date("October 13, 2014 11:13:00"))
                   .pressButton('Add Project', done);
               });
             });
@@ -50,7 +50,7 @@ describe('Create a project', function() {
     });
 
     it('should see the project title, description, and dates', function() {
-      browser.assert.text('li', 'Building a school, a new school, from 21-10-2016 to 21-10-2017');
+      browser.assert.text('li', 'Building a school, a new school, from '+new Date("October 13, 2014 11:13:00")+' to '+new Date("October 13, 2014 11:13:00"));
     });
   });
 
