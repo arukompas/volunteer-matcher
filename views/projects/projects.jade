@@ -2,10 +2,9 @@ extends ../layout
 
 block content
   .container
-    h1 Listed Projects
-    p.lead Say something worthwhile here.
+    h1.projects Listed Projects
+    p.lead Currently open projects you can support.
     br
     ul
       each project in projects
         li= project.title+', '+project.description+', from '+ project.startingDate+' to '+ project.endDate
-        

@@ -13,7 +13,7 @@ describe('Create a requirement', function(){
     });
 
     it('should see the requirement list in the particular project page', function() {
-      browser.assert.text('h1', 'Listed Projects');
+      browser.assert.text('h1.projects', 'Listed Projects');
     });
   });
 

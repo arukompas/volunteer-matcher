@@ -63,7 +63,8 @@ router.post('/projects', function(req, res) {
     title : req.body.title,
     description: req.body.description,
     startingDate: req.body.startingDate,
-    endDate: req.body.endDate
+    endDate: req.body.endDate,
+    owner_id: req.user._id
   });
   project.save(function(err, project) {
     if(err){
@@ -81,7 +82,7 @@ router.get('/projects', function(req, res) {
 });
 
 router.get('/projects/:projectId/requirements', function(req, res){
-  Requirement.find({projectId: req.params.projectId}, function(err, requirements) {
+  Requirement.find({_projectId: req.params.projectId}, function(err, requirements) {
     if (err) {
       res.send('Error getting requirements from the database');
     } else {
@@ -94,13 +95,13 @@ router.get('/projects/:projectId/requirements/new', function(req, res) {
   if (!req.user) {
     res.redirect('/projects');
   } else {
-    res.render('requirements/new', {projectId: req.params.projectId});
+    res.render('requirements/new', { projectId: req.params.projectId });
   }
 });
 
 router.post('/projects/:projectId/requirements', function(req, res) {
   var requirement = new Requirement({
-    projectId: req.params.projectId,
+    _projectId: req.params.projectId,
     title: req.body.title,
     description: req.body.description,
     capacity: req.body.capacity,

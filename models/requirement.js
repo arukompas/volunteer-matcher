@@ -4,10 +4,10 @@ var Schema = mongoose.Schema;
 
 var RequirementSchema = new Schema({
   _id: Number,
-  projectId: Number,
+  _projectId: Number,
   title: String,
   description: String,
-  isActive: Boolean,
+  isActive: { type: Boolean, default: true },
   capacity: Number,
   startingDate: String,
   endDate:      String

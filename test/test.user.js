@@ -1,5 +1,4 @@
 var should = require("should");
-var mongoose = require('mongoose');
 var Account = require("../models/account.js");
 var db;
 
