@@ -20,7 +20,7 @@ describe('Create a project', function() {
       browser.visit('/projects/new', done);
     });
     it('should see the project list in the projects page', function(){
-        browser.assert.text('h1', 'Listed Projects');
+        browser.assert.text('h1.projects', 'Listed Projects');
     });
   });
 
