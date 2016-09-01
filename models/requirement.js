@@ -4,15 +4,13 @@ var Schema = mongoose.Schema;
 
 var RequirementSchema = new Schema({
   _id: Number,
-  _project_id: Number,
+  _projectId: Number,
   title: String,
   description: String,
-  isActive: Boolean,
+  isActive: { type: Boolean, default: true },
   capacity: Number,
-  duration: {
-    from: Date,
-    to: Date
-  }
+  startingDate: String,
+  endDate:      String
 });
 
 autoIncrement.initialize(mongoose.connection);
