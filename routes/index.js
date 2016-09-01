@@ -91,16 +91,14 @@ router.get('/projects/:projectId/requirements', function(req, res){
 });
 
 router.get('/projects/:projectId/requirements/new', function(req, res) {
-  console.log(req.params);
   if (!req.user) {
     res.redirect('/projects');
   } else {
     res.render('requirements/new', {projectId: req.params.projectId});
   }
-})
+});
 
 router.post('/projects/:projectId/requirements', function(req, res) {
-  console.log(req.params);
   var requirement = new Requirement({
     projectId: req.params.projectId,
     title: req.body.title,
@@ -116,10 +114,7 @@ router.post('/projects/:projectId/requirements', function(req, res) {
       res.redirect('/projects/' + req.params.projectId + '/requirements')
     }
   });
-
-  // res.render('requirements/requirement', { requirement: requirement });
-  // var requirement = new Requirement({projectId}
-})
+});
 
 
 module.exports = router;
