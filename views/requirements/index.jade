@@ -2,8 +2,9 @@ extends ../layout
 
 block content
   each requirement in requirements
-    h2#title= requirement.title
-    p#description= requirement.description
-    p#capacity= 'Quantity needed: ' + requirement.capacity
-    p#startingDate= 'Starting on ' + requirement.startingDate
-    p#endDate= 'Ending on ' + requirement.endDate
+    h2.title= requirement.title
+    p.description= requirement.description
+    p.capacity= 'Quantity needed: ' + requirement.capacity
+    p.startingDate= 'Starting on ' + requirement.startingDate
+    p.endDate= 'Ending on ' + requirement.endDate
+    a(href='/projects/#{requirement._projectId}/requirements/#{requirement._id}/delete').delete Remove requirement
