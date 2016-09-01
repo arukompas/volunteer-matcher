@@ -42,14 +42,25 @@ describe('Create a requirement', function(){
     });
 
     it('displays the requirement on the page', function() {
-      browser.assert.text('#title', 'Teachers Needed');
-      browser.assert.text('#description', 'Teachers are needed');
-      browser.assert.text('#capacity', 'Quantity needed: 5');
-      browser.assert.text('#startingDate', 'Starting on 21-10-2016');
-      browser.assert.text('#endDate', 'Ending on 21-10-2017');
+      browser.assert.text('.title', 'Teachers Needed');
+      browser.assert.text('.description', 'Teachers are needed');
+      browser.assert.text('.capacity', 'Quantity needed: 5');
+      browser.assert.text('.startingDate', 'Starting on 21-10-2016');
+      browser.assert.text('.endDate', 'Ending on 21-10-2017');
+    });
+
+    it('deletes an existing requirement', function(done) {
+      browser.fire('.delete', 'click', function() {
+        browser.assert.success();
+        expect(browser.text('.title')).not.to.equal('Teachers Needed');
+        done();
+      });
+
     });
 
   });
+
+
 
   afterEach(function(done){
     Requirement.remove({}, function(){

@@ -127,5 +127,15 @@ router.post('/projects/:projectId/requirements', function(req, res) {
   });
 });
 
+router.get('/projects/:projectId/requirements/:id/delete', function(req, res) {
+  Requirement.remove({_id: req.params.id}, function(err) {
+    if (err) {
+      res.send('Error removing a requirement');
+    } else {
+      res.redirect('/projects/' + req.params.projectId + '/requirements')
+    }
+  })
+})
+
 
 module.exports = router;
