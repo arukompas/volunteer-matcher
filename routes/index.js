@@ -7,12 +7,12 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res) {
-    res.render('index', { user : req.user, title : "Titus..." });
+    res.render('index', { user : req.user });
 });
 
 router.get('/register', function(req, res) {
     if (req.user) res.redirect('/');
-    res.render('register', { });
+    res.render('register', { user : req.user });
 });
 
 router.post('/register', function(req, res, next) {
@@ -54,7 +54,7 @@ router.get('/projects/new', function (req, res) {
   if (!req.user) {
     res.redirect('/projects');
   } else {
-    res.render('projects/new');
+    res.render('projects/new', { user: req.user } );
   }
 });
 
@@ -75,10 +75,20 @@ router.post('/projects', function(req, res) {
   });
 });
 
+// router.get('/projects', function(req, res) {
+//   Accounts = Account.find({});
+//   Project.find({}, function(err, projects) {
+//     res.render('projects/projects', {projects: projects, user: req.user, Accounts: Accounts});
+//   });
+// });
+
 router.get('/projects', function(req, res) {
+  Account.find({}, function(err, accounts) {;
   Project.find({}, function(err, projects) {
-    res.render('projects/projects', {projects: projects});
+    console.log(accounts);
+    res.render('projects/projects', {projects: projects, user: req.user, accounts: accounts});
   });
+});
 });
 
 router.get('/projects/:projectId/requirements', function(req, res){
@@ -86,7 +96,7 @@ router.get('/projects/:projectId/requirements', function(req, res){
     if (err) {
       res.send('Error getting requirements from the database');
     } else {
-      res.render('requirements/index', { requirements: requirements });
+      res.render('requirements/index', { requirements: requirements, user : req.user });
     }
   });
 });
@@ -95,7 +105,7 @@ router.get('/projects/:projectId/requirements/new', function(req, res) {
   if (!req.user) {
     res.redirect('/projects');
   } else {
-    res.render('requirements/new', { projectId: req.params.projectId });
+    res.render('requirements/new', { projectId: req.params.projectId, user : req.user });
   }
 });
 
