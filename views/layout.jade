@@ -6,10 +6,21 @@ html
     link(href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css', rel='stylesheet', media='screen')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    a(href='/')
+      h1 Volunteer Matcher
+
     if (error && error.length > 0)
       br
       h4.error-msg= error
       br
+
+    if (!user)
+      a(href="/login") Login
+      br
+      a(href="/register") Register
+    if (user)
+      p You are currently logged in as #{user.username}
+      a(href="/logout") Logout
 
     block content
 
