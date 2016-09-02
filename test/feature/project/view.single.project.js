@@ -48,7 +48,7 @@ describe('A user can view a single project',function() {
   });
 
   it('should list all referenced Requirements', function() {
-    browser.assert.text('h3.require_title', 'First Requirement');
+    browser.assert.text('h4.require_title', '- First Requirement');
     browser.assert.text('p.require_descrip', 'A short description');
   });
 });
