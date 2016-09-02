@@ -10,4 +10,14 @@ block content
     br
     ul
       each project in projects
-        li= project.title+', '+project.description+', from '+ project.startingDate+' to '+ project.endDate
+        .project
+          h2.title= project.title
+          p.description= project.description
+
+          p.startingDate= 'Starting on ' + project.startingDate
+          p.endDate= 'Ending on ' + project.endDate
+          span.author= accounts.find(function(item) {return item._id == project.owner_id})
+          br
+          a(href='/projects/new') VIEW DETAILS
+
+        br
