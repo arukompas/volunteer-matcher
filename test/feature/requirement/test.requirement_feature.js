@@ -62,7 +62,6 @@ describe('Create a requirement', function(){
       });
     });
 
-  // before(function(done){
     it('edits an existing requirement', function(done) {
       browser.fire('.edit', 'click', function() {
         browser.assert.success();

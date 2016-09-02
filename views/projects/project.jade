@@ -1,16 +1,20 @@
 extends ../layout
 
 block content
+  .project
+    h2#title= project.title
+    p#description= project.description
+    p#startingDate= 'Starting on ' + project.startingDate
+    p#endDate= 'Ending on ' + project.endDate
+    p#status= (project.complete) ? 'Project: Complete' : 'Project: Open'
 
-  h2#title= project.title
-  p#description= project.description
-  p#startingDate= 'Starting on ' + project.startingDate
-  p#endDate= 'Ending on ' + project.endDate
-  p#status= (project.complete) ? 'Project: Complete' : 'Project: Open'
+    a(href='/projects/'+project._id+'/requirements/new') Add requirements for the project
 
-  each requirement in project.requirements
-    h3.require_title= requirement.title
-    p.require_descrip= requirement.description
-    p.status= (requirement.complete) ? 'Requirement: Complete' : 'Requirement: Open'
-    p.startingDate= requirement.startingDate
-    p.endDate= requirement.endDate
+    hr
+    h3="Project Requirements"
+    each requirement in project.requirements
+      h4.require_title= requirement.title
+      p.require_descrip= requirement.description
+      p.status= (requirement.complete) ? 'Requirement: Complete' : 'Requirement: Open'
+      p.startingDate= requirement.startingDate
+      p.endDate= requirement.endDate
