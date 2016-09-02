@@ -16,8 +16,8 @@ block content
 
           p.startingDate= 'Starting on ' + project.startingDate
           p.endDate= 'Ending on ' + project.endDate
-          span.author= accounts.find(function(item) {return item._id == project.owner_id})
+          //- span.author= accounts.find(function(item) {return item._id == project.owner_id})
           br
-          a(href='/projects/new') VIEW DETAILS
+          a(href='/projects/'+project._id) VIEW DETAILS
 
         br

@@ -1,7 +1,6 @@
 var chai = require('chai'), assert = chai.assert, expect = chai.expect, should = chai.should();
 var Browser = require('zombie');
 var browser = new Browser({ site: 'http://localhost:3000' });
-var should = require("should");
 var Project = require("../../../models/project.js");
 
 
