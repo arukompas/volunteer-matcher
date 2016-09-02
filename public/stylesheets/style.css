@@ -1,10 +1,91 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background: #eee;
+}
+
+#wrapper {
+  width: 960px;
+  margin: -30px auto;
+  background: white;
+
+}
+
+#header img {
+  margin: 10px;
+  float: left;
+}
+
+#logo {
+  float: left;
+}
+
+#login {
+  float: right;
+  margin: 20px;
+}
+
+#banner img {
+  width: 940px;
+  height: 200px;
+  margin: 10px;
+}
+
+#content {
+  margin: 10px;
+}
+
+#nav-bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #eee;
+}
+
+#nav-bar ul li {
+    float: left;
+}
+
+#nav-bar ul li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#nav-bar ul li a:hover {
+    background-color: #016972;
+    color: #eee;
+}
+
+#footer {
+  height: 100px;
+  margin: 20px 10px;
+  background: #ddd;
+}
+
+.requirement {
+  margin: 20px;
+  width: 300px;
+  padding: 10px;
+  -webkit-box-shadow: 2px 2px 3px 4px #eee;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow:    2px 2px 3px 4px #eee;  /* Firefox 3.5 - 3.6 */
+    box-shadow:         2px 2px 3px 4px #eee;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+.project {
+  margin: 10px;
+  width: 700px;
+  padding: 10px;
+  -webkit-box-shadow: 1px 1px 2px 3px #eee;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow:    1px 1px 2px 3px #eee;  /* Firefox 3.5 - 3.6 */
+    box-shadow:         1px 1px 2px 3px #eee;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
 }
 
 a {
-  color: #00B7FF;
+  color: #50a4ac;
 }
 
 .main_nav {margin: 20px;}
