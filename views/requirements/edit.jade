@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  .container
+    h1 Edit requirement
+    p.lead So, the requirements are:
+    br
+    form(role='form', action="/projects/#{requirement._projectId}/requirements/#{requirement._id}",method="post", style='max-width: 300px;')
+      .form-group
+        input.form-control(type='text', name="title", placeholder='Enter the requirement title.', value="#{requirement.title}")
+      .form-group
+        input.form-control(type='text', name="description", placeholder='Please describe the requirement here.', value="#{requirement.description}")
+      .form-group
+        input.form-control(type='text', name="capacity", placeholder='What is the capacity for the requirement?', value="#{requirement.capacity}")
+      .form-group
+        input.form-control(type='text', name="startingDate", placeholder="dd/mm/yyyy", value="#{requirement.startingDate}")
+      .form-group
+        input.form-control(type='text', name="endDate", placeholder="dd/mm/yyyy", value="#{requirement.endDate}")
+
+      button.btn.btn-default(type='submit') Confirm changes
+
+      a(href='/projects/#{projectId}/requirements')
+        button.btn.btn-primary(type="button") Cancel

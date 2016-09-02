@@ -1,0 +1,7 @@
+extends ../layout
+
+block content
+  .container
+    each offer in offers
+      .offer
+        p.message= offer.message
