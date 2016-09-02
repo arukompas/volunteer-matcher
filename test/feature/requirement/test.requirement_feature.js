@@ -18,22 +18,27 @@ describe('Create a requirement', function(){
   });
 
   describe('Signed-in users/owner', function() {
+
     before(function(done) {
       browser.visit('/register', function() {
         browser
           .fill('username', 'Titus')
           .fill('password', 'password')
           .pressButton('Submit', function() {
-            browser.visit('/projects/1/requirements/new', function() {
-              browser
-                .fill('title', 'Teachers Needed')
-                .fill('description', "Teachers are needed")
-                .fill('capacity', 5)
-                .fill('startingDate', '21-10-2016')
-                .fill('endDate', '21-10-2017')
-                .pressButton('Add Requirement', done);
-            });
+          done();
           });
+      });
+    });
+
+    beforeEach(function(done) {
+      browser.visit('/projects/1/requirements/new', function() {
+        browser
+          .fill('title', 'Teachers Needed')
+          .fill('description', "Teachers are needed")
+          .fill('capacity', 5)
+          .fill('startingDate', '21-10-2016')
+          .fill('endDate', '21-10-2017')
+          .pressButton('Add Requirement', done);
       });
     });
 
@@ -58,40 +63,19 @@ describe('Create a requirement', function(){
     });
 
   // before(function(done){
-    it('edits an existing requirement', function() {
-      browser.visit('/projects/1/requirements/new', function(done) {
+    it('edits an existing requirement', function(done) {
+      browser.fire('.edit', 'click', function() {
+        browser.assert.success();
+        expect(browser.text('h1')).to.equal('Edit requirement');
         browser
-          .fill('title', 'Teachers Needed2')
-          .fill('description', "Teachers are needed2")
-          .fill('capacity', 5)
-          .fill('startingDate', '23-10-2016')
-          .fill('endDate', '24-10-2017')
-          .pressButton('Add Requirement', function(){
-            browser.fire('.edit', 'click', function() {
-              browser.assert.success();
-              console.log('HERE');
-              expect(browser.text('h1')).to.equal('Edit requirement');
-
-              browser
-                .fill('description', "More teachers are needed")
-                .pressButton('Confirm changes', function(){
-                  expect(browser.text('p.description')).to.equal('More teachers Needed');
-                  done();
-                });
-            });
+          .fill('description', "More teachers needed")
+          .pressButton('Confirm changes', function(){
+            expect(browser.text('p.description')).to.equal('More teachers needed');
+            done();
           });
       });
     });
-
-
-
-
-
-});
-
-
-
-
+  });
 
   afterEach(function(done){
     Requirement.remove({}, function(){

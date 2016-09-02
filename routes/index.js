@@ -138,14 +138,29 @@ router.get('/projects/:projectId/requirements/:id/delete', function(req, res) {
 });
 
 router.get('/projects/:projectId/requirements/:id/edit', function(req, res) {
-  Requirement.find({_id: req.params.id}, function(err, requirement){
+  Requirement.findOne({_id: req.params.id}, function(err, requirement){
     if (err) {
       res.send('Error getting the requirement from the database');
     } else {
-      res.render('requirements/edit', { requirements: requirement, user : req.user });
+      res.render('requirements/edit', { requirement: requirement });
     }
   });
+});
 
+router.post('/projects/:projectId/requirements/:id', function(req, res) {
+  Requirement.update({_id: req.params.id}, {
+    title: req.body.title,
+    description: req.body.description,
+    capacity: req.body.capacity,
+    startingDate: req.body.startingDate,
+    endDate: req.body.endDate
+  }, {}, function(err, requirement) {
+    if (err) {
+      res.send('Error getting the requirement from the database');
+    } else {
+      res.redirect('/projects/' + req.params.projectId + '/requirements')
+    }
+  });
 });
 
 
