@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  .container
+    h1 Submit your offer
+    p.lead Requirement: #{ requirement.title }
+    br
+    form(role='form', action="/requirements/#{ requirement._id }/offers", method="post", style='max-width: 300px;')
+      .form-group
+          input.form-control(type='text', name="message", placeholder='Your message to the project owner.')
+
+      button.btn.btn-default(type='submit') Send the offer
+
+      a(href='/')
+        button.btn.btn-primary(type="button") Cancel

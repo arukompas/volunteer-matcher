@@ -2,14 +2,31 @@ var chai = require('chai'), assert = chai.assert, expect = chai.expect, should =
 var Browser = require('zombie');
 Browser.localhost('example.com', 3000);
 var should = require('should');
-var Offer = require('../../../models/offer.js');
+var Offer = require('../../../models/offer');
+var Requirement = require('../../../models/requirement');
 
 describe('Creating an offer', function() {
+  this.timeout(5000);
   var browser = new Browser();
+  var requirement;
+
+  before(function(done){
+    Requirement.create({
+      _projectId: 0,
+      title: 'English teacher',
+      description: 'A fluent english teacher needed for a couple of weeks',
+      capacity: 2,
+      startingDate: '10/12/12',
+      endDate:      '24/12/12'
+    }, function(err, data){
+      requirement = data;
+      done();
+    });
+  });
 
   describe('Not signed in users', function(){
     before(function(done){
-      browser.visit('requirements/1/offers/new', done);
+      browser.visit('requirements/' + requirement._id + '/offers/new', done);
     });
 
     it('should not allow to make an offer when not logged in', function(){
@@ -20,7 +37,7 @@ describe('Creating an offer', function() {
   describe('Signed in user', function() {
     before(function(done){
       registerUser(function() {
-        browser.visit('/requirements/1/offers/new', done);
+        browser.visit('/requirements/' + requirement._id + '/offers/new', done);
       });
     });
 
@@ -46,5 +63,11 @@ describe('Creating an offer', function() {
         .pressButton('Submit', done);
     });
   }
+
+  after(function(done){
+    Requirement.remove({}, function(){
+      Offer.remove({}, done);
+    })
+  });
 
 });

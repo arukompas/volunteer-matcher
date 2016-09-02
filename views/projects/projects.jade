@@ -10,5 +10,4 @@ block content
     br
     ul
       each project in projects
-        span.author= accounts.find(function(item) {return item._id == project.owner_id})
         li= project.title+', '+project.description+', from '+ project.startingDate+' to '+ project.endDate
