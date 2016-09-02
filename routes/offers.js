@@ -4,27 +4,27 @@ var Requirement = require('../models/requirement');
 var router = express.Router();
 
 
-router.get('/offers/new', function(req, res) {
+router.get('/requirements/:requirementId/offers/new', function(req, res) {
   if (!req.user) {
     res.redirect('/projects');
   } else {
-    Requirement.find({ _id: req.params.requirementId }, function(err, requirement) {
+    Requirement.findOne({ _id: req.params.requirementId }, function(err, requirement) {
       if (err) {
-        console.log(err.errors);
         res.send(err);
       } else {
-        console.log('Requirement: ', requirement);
         res.render('offers/new', { requirement: requirement });
       }
     });
   }
 });
 
-router.post('/offers', function(req, res) {
+router.post('/requirements/:requirementId/offers', function(req, res) {
   if (!req.user) {
     res.redirect('/projects');
   } else {
     var offer = new Offer({
+      _requirement: req.params.requirementId,
+      _volunteer: req.user._id,
       message: req.body.message
     });
     offer.save(function(err) {
@@ -35,6 +35,16 @@ router.post('/offers', function(req, res) {
       }
     })
   }
+});
+
+router.get('/requirements/:requirementId/offers', function(req, res) {
+  Offer.find({ _requirement: req.params.requirementId }, function(err, offers) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.render('offers/index', { offers: offers });
+    }
+  });
 });
 
 

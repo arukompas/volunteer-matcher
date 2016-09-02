@@ -49,7 +49,7 @@ describe('Creating an offer', function() {
       browser
         .fill('message', 'I\'m the man for the job!')
         .pressButton('Send the offer').then(function(){
-          browser.assert.text('.message', 'I\'m the man for the job!');
+          browser.assert.text('p.message', 'I\'m the man for the job!');
           done();
         });
     });

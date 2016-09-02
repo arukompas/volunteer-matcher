@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', routes);
-app.use('/requirements/:requirementId', offers);
+app.use(offers);
 app.use('/users', users);
 
 // passport config
