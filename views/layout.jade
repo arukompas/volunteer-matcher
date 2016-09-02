@@ -6,23 +6,41 @@ html
     link(href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css', rel='stylesheet', media='screen')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    a(href='/')
-      h1 Volunteer Matcher
+    #wrapper
+      #header
+        #logo
+          a(href='/')
+            img(src='../../images/volunteer-matcher-small.png')
+        #login
+          if (!user)
+            a(href="/login") Login |
+            a(href="/register") Register
+          if (user)
+            p You are currently logged in as #{user.username}
+            a(href="/logout") Logout
 
-    if (error && error.length > 0)
-      br
-      h4.error-msg= error
-      br
+      #banner
+        img(src='../../images/volunteer-banner.png')
 
-    if (!user)
-      a(href="/login") Login
-      br
-      a(href="/register") Register
-    if (user)
-      p You are currently logged in as #{user.username}
-      a(href="/logout") Logout
+      #content
+       #nav-bar
+          ul
+            li
+              a(href='/') Home
+            li
+              a(href='#') News
+            li
+              a(href='#') Contact
+            li
+              a(href='#') About
 
-    block content
+        if (error && error.length > 0)
+          br
+          h4.error-msg= error
+          br
 
+        block content
+
+      #footer
   script(src='http://code.jquery.com/jquery.js')
   script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')

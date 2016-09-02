@@ -43,7 +43,10 @@ describe('Create a project', function() {
     });
 
     it('should see the project title, description, and dates', function() {
-      browser.assert.text('li', 'Building a school, a new school, from '+new Date("October 13, 2014 11:13:00")+' to '+new Date("October 13, 2014 11:13:00"));
+      browser.assert.text('h2.title', 'Building a school');
+      browser.assert.text('p.description', 'a new school');
+      browser.assert.text('p.startingDate', 'Starting on '+new Date("October 13, 2014 11:13:00"));
+      browser.assert.text('p.endDate', 'Ending on '+new Date("October 13, 2014 11:13:00"));
     });
 
     xit('should show the project creator', function() {
