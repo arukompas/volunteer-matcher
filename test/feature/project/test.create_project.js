@@ -43,11 +43,11 @@ describe('Create a project', function() {
     });
 
     it('should see the project title, description, and dates', function() {
-      browser.assert.text('li', 'Building a school, a new school, from '+new Date("October 13, 2014 11:13:00")+' to '+new Date("October 13, 2014 11:13:00"));
+      browser.assert.text('li', 'Building a school, a new school, from Mon Oct 13 to Mon Oct 13');
     });
 
-    xit('should show the project creator', function() {
-      browser.assert.text('span.author', 'Bob');
+    it('should show the project creator', function() {
+      browser.assert.text('span.author', 'Project created by, Bob');
     });
   });
 

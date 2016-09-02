@@ -9,6 +9,7 @@ var ProjectSchema = new Schema({
   startingDate: Date,
   endDate:      Date,
   complete:    { type: Boolean, default: false },
+  creator:      String,
   owner_id: { type: Schema.Types.ObjectId, ref: 'Account' },
   requirements: [{ type: Number, ref: 'Requirement'}]
 });

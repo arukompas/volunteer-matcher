@@ -8,7 +8,12 @@ block content
       a(href='/projects/new')
         button.btn.btn-default(type='submit') Add Project
     br
+    br
     ul
       each project in projects
-        span.author= accounts.find(function(item) {return item._id == project.owner_id})
-        li= project.title+', '+project.description+', from '+ project.startingDate+' to '+ project.endDate
+        a(href="/projects/#{project.id}")
+          button.btn.btn-secondary(type='submit') View Project
+        p
+          span.author Project created by,
+            span.italic= ' ' + project.creator
+          li= project.title+', '+project.description+', from '+ String(project.startingDate).split(' ').slice(0,3).join(' ') +' to '+ String(project.endDate).split(' ').slice(0,3).join(' ')

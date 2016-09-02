@@ -6,10 +6,10 @@ var mongoose = require('mongoose');
 var server;
 
 before(function(done){
-  this.timeout(10000);
+  // this.timeout(100000);
   app = require('../app.js');
-  server = http.createServer(app).listen(3000);
-  done();
+  server = http.createServer(app).listen(3000, done)
+  // done();
 });
 
 after(function(done){

@@ -64,7 +64,8 @@ router.post('/projects', function(req, res) {
     description: req.body.description,
     startingDate: req.body.startingDate,
     endDate: req.body.endDate,
-    owner_id: req.user._id
+    owner_id: req.user._id,
+    creator: req.user.username
   });
   project.save(function(err, project) {
     if(err){
@@ -83,12 +84,9 @@ router.post('/projects', function(req, res) {
 // });
 
 router.get('/projects', function(req, res) {
-  Account.find({}, function(err, accounts) {;
   Project.find({}, function(err, projects) {
-    console.log(accounts);
-    res.render('projects/projects', {projects: projects, user: req.user, accounts: accounts});
+    res.render('projects/projects', {projects: projects, user: req.user});
   });
-});
 });
 
 router.get('/projects/:projectId/requirements', function(req, res){
