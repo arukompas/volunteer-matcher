@@ -132,8 +132,19 @@ router.get('/projects/:projectId/requirements/:id/delete', function(req, res) {
     if (err) {
       res.send('Error removing a requirement');
     } else {
-      res.redirect('/projects/' + req.params.projectId + '/requirements')
+      res.redirect('/projects/' + req.params.projectId + '/requirements');
     }
+  });
+});
+
+router.get('/projects/:id', function(req, res){
+  Project.findOne({_id: req.params.id}).populate('requirements').exec(function(err, project) {
+    if (err) {
+      res.send('Error getting project from the database');
+    } else {
+      console.log(project.requirements)
+      res.render('projects/project', { project: project, user : req.user });
+    };
   });
 });
 
