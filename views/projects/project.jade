@@ -7,10 +7,13 @@ block content
   p#startingDate= 'Starting on ' + project.startingDate
   p#endDate= 'Ending on ' + project.endDate
   p#status= (project.complete) ? 'Project: Complete' : 'Project: Open'
+  br
+  h3.requirement= 'Requirements'
 
   each requirement in project.requirements
-    h3.require_title= requirement.title
+    h4.require_title= '- ' + requirement.title
     p.require_descrip= requirement.description
+    p.require_capacity requirement.capacity
     p.status= (requirement.complete) ? 'Requirement: Complete' : 'Requirement: Open'
     p.startingDate= requirement.startingDate
     p.endDate= requirement.endDate
