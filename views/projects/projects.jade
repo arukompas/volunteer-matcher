@@ -4,7 +4,11 @@ block content
   .container
     h1.projects Listed Projects
     p.lead Currently open projects you can support.
+    if (user)
+      a(href='/projects/new')
+        button.btn.btn-default(type='submit') Add Project
     br
     ul
       each project in projects
+        span.author= accounts.find(function(item) {return item._id == project.owner_id})
         li= project.title+', '+project.description+', from '+ project.startingDate+' to '+ project.endDate
