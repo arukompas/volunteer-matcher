@@ -122,7 +122,12 @@ router.post('/projects/:projectId/requirements', function(req, res) {
     if (err) {
       res.send('Error creating a requirement');
     } else {
-      res.redirect('/projects/' + req.params.projectId + '/requirements')
+      Project.findOne({_id: req.params.projectId }, function(err, project) {
+        project.requirements.push(requirement);
+        project.save(function() {
+          res.redirect('/projects/' + req.params.projectId + '/requirements');
+        });
+      });
     }
   });
 });
