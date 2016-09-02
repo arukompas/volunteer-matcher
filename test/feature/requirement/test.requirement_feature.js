@@ -2,14 +2,30 @@ var chai = require('chai'), assert = chai.assert, expect = chai.expect, should =
 var Browser = require('zombie');
 var browser = new Browser({ site: 'http://localhost:3000' });
 var Requirement = require('../../../models/requirement');
+var Project = require('../../../models/project');
 
 describe('Create a requirement', function(){
 
   this.timeout(10000);
+  var project;
+
+  before(function(done){
+    Project.create({
+      title:        'Project Title',
+      description:  'Project description',
+      startingDate: new Date(),
+      endDate:      new Date(),
+      owner_id: '57c93bec43c50fec2a8b29be',
+      requirements: []
+    }, function(err, data) {
+      project = data;
+      done();
+    });
+  });
 
   describe("Not signed-in user/owner", function(done) {
     before(function(done) {
-      browser.visit('/projects/1/requirements/new', done);
+      browser.visit('/projects/' + project._id + '/requirements/new', done);
     });
 
     it('should see the requirement list in the particular project page', function() {
@@ -31,7 +47,7 @@ describe('Create a requirement', function(){
     });
 
     beforeEach(function(done) {
-      browser.visit('/projects/1/requirements/new', function() {
+      browser.visit('/projects/' + project._id + '/requirements/new', function() {
         browser
           .fill('title', 'Teachers Needed')
           .fill('description', "Teachers are needed")

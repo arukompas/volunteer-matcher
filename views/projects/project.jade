@@ -8,9 +8,12 @@ block content
   p#endDate= 'Ending on ' + project.endDate
   p#status= (project.complete) ? 'Project: Complete' : 'Project: Open'
 
+  a(href="/projects/#{project._id}/requirements/new") Add a requirement
+
   each requirement in project.requirements
     h3.require_title= requirement.title
     p.require_descrip= requirement.description
-    p.status= (requirement.complete) ? 'Requirement: Complete' : 'Requirement: Open'
+    p.status= (requirement.complete) ? 'Status: Complete' : 'Requirement: Open'
     p.startingDate= requirement.startingDate
     p.endDate= requirement.endDate
+    a(href="/requirements/#{requirement._id}/offers/new") Volunteer!

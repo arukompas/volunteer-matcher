@@ -123,10 +123,13 @@ router.post('/projects/:projectId/requirements', function(req, res) {
       res.send('Error creating a requirement');
     } else {
       Project.findOne({_id: req.params.projectId }, function(err, project) {
-        project.requirements.push(requirement);
-        project.save(function() {
-          res.redirect('/projects/' + req.params.projectId + '/requirements');
-        });
+        if (err) res.send(err);
+        else {
+          project.requirements.push(requirement);
+          project.save(function() {
+            res.redirect('/projects/' + req.params.projectId + '/requirements');
+          });
+        }
       });
     }
   });
