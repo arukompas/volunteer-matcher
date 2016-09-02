@@ -134,8 +134,19 @@ router.get('/projects/:projectId/requirements/:id/delete', function(req, res) {
     } else {
       res.redirect('/projects/' + req.params.projectId + '/requirements')
     }
-  })
-})
+  });
+});
+
+router.get('/projects/:projectId/requirements/:id/edit', function(req, res) {
+  Requirement.find({_id: req.params.id}, function(err, requirement){
+    if (err) {
+      res.send('Error getting the requirement from the database');
+    } else {
+      res.render('requirements/edit', { requirements: requirement, user : req.user });
+    }
+  });
+
+});
 
 
 module.exports = router;

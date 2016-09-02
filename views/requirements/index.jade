@@ -11,4 +11,7 @@ block content
       p.startingDate= 'Starting on ' + requirement.startingDate
       p.endDate= 'Ending on ' + requirement.endDate
       br
+      
+      a(href='/projects/#{requirement._projectId}/requirements/#{requirement._id}/edit').edit Edit requirement      
+      
       a(href='/projects/#{requirement._projectId}/requirements/#{requirement._id}/delete').delete Remove requirement

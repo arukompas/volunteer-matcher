@@ -55,10 +55,41 @@ describe('Create a requirement', function(){
         expect(browser.text('.title')).not.to.equal('Teachers Needed');
         done();
       });
-
     });
 
-  });
+  // before(function(done){
+    it('edits an existing requirement', function() {
+      browser.visit('/projects/1/requirements/new', function(done) {
+        browser
+          .fill('title', 'Teachers Needed2')
+          .fill('description', "Teachers are needed2")
+          .fill('capacity', 5)
+          .fill('startingDate', '23-10-2016')
+          .fill('endDate', '24-10-2017')
+          .pressButton('Add Requirement', function(){
+            browser.fire('.edit', 'click', function() {
+              browser.assert.success();
+              console.log('HERE');
+              expect(browser.text('h1')).to.equal('Edit requirement');
+
+              browser
+                .fill('description', "More teachers are needed")
+                .pressButton('Confirm changes', function(){
+                  expect(browser.text('p.description')).to.equal('More teachers Needed');
+                  done();
+                });
+            });
+          });
+      });
+    });
+
+
+
+
+
+});
+
+
 
 
 
