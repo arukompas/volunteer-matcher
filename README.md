@@ -1,6 +1,6 @@
 # Volunteer Matcher
 
-[Heroku](https://makers-volunteer-matcher.herokuapp.com/)
+> **[Heroku](https://makers-volunteer-matcher.herokuapp.com/)**
 
 ## Team Members
 * Sarah
@@ -10,12 +10,16 @@
 * Arunas
 
 ## Description
-A job board for voluntary job opportunities including a rewards scheme.
+A job board for voluntary job opportunities. Done in 3.5 days.
 
 ## Technologies used
 * Node.js
 * Express.js
-* MongoDB (via Mongoose)
+* MongoDB (via Mongoose
+* Passport.js authentication
+* Jade templating engine
+
+
 **Tested with:**
 * Mocha & Chai
 * Zombie.js
@@ -56,7 +60,7 @@ So I can help towards a project's goals,
 I would like to contribute with resources.
 ```
 
-## Models (brainstormed)
+## Models (brainstormed, rough draft)
 
 * Project
   * belongs_to user/project manager
@@ -81,4 +85,3 @@ I would like to contribute with resources.
   * has_many Projects
   * has_many Offers
   * user can submit an offer to fulfil a single Requirement
-
