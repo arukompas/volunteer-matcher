@@ -47,7 +47,11 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 // mongoose
-mongoose.connect('mongodb://localhost/volunteer_matcher_' + process.env.NODE_ENV);
+if (process.env.NODE_ENV === 'production') {
+  mongoose.connect(process.env.DATABASE_URL);
+} else {
+  mongoose.connect('mongodb://localhost/volunteer_matcher_' + process.env.NODE_ENV);
+}
 
 
 // catch 404 and forward to error handler
