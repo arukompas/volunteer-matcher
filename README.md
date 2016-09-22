@@ -1,5 +1,7 @@
 # Volunteer Matcher
 
+[Heroku](https://makers-volunteer-matcher.herokuapp.com/)
+
 ## Team Members
 * Sarah
 * Titus
@@ -12,8 +14,11 @@ A job board for voluntary job opportunities including a rewards scheme.
 
 ## Technologies used
 * Node.js
+* Express.js
 * MongoDB (via Mongoose)
-
+**Tested with:**
+* Mocha & Chai
+* Zombie.js
 
 ## User stories
 
@@ -51,7 +56,7 @@ So I can help towards a project's goals,
 I would like to contribute with resources.
 ```
 
-## Models
+## Models (brainstormed)
 
 * Project
   * belongs_to user/project manager
@@ -77,31 +82,3 @@ I would like to contribute with resources.
   * has_many Offers
   * user can submit an offer to fulfil a single Requirement
 
-
-
-## Structure
-
-* A project
-  * Status: pending/complete
-  * Description
-  * Timeframe (expected start/end of the project)
-  * Skills needed
-  * Rewards, if any
-  * Sponsorships/Support, if any
-    * Financial
-    * Accommodation
-
-* Volunteering Offer
-  * Specify availability
-  * Offers
-    * Skills
-    * Services
-    * etc.
-  * Requires
-    * Accommodation
-    * Resources
-    * etc.
-
-* Sponsorship offer
-  * Can contribute towards other volunteers
-  * Provide resources for projects and/or volunteers
